@@ -1,14 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+/** @format */
+
+import "./App.css";
 import "./styles/styles.css";
 import "./styles/index.css";
-
+import Content from "./containers/Content";
 function App() {
-  return (
-    <div className=" bg-red-500">
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
-    </div>
-  );
+  return <Content />;
 }
 
 export default App;
