@@ -4,19 +4,18 @@ import React from "react";
 import In from "../assets/icons/in.svg";
 import Out from "../assets/icons/out.svg";
 
-const Transaction = ({ trans, title, desc }) => {
+const Transaction = ({ trans, title, desc, balance, date, type }) => {
   return (
     <div className="flex items-center justify-between mb-7">
       <div className="flex items-center">
-        {trans === "in" ? (
+        {trans?.type === "deposit" ? (
           <img src={In} alt="trans in" />
         ) : (
           <img src={Out} alt="trans out" />
         )}
         <div className="ml-3">
           <h2 className="text-[16px] font-[500] text-[#131316] tracking-[-0.2px]">
-            {" "}
-            {title}{" "}
+            {trans?.type !== "deposit" ? "Cash withdrawal " : title}{" "}
           </h2>
           <p
             className={
@@ -24,24 +23,25 @@ const Transaction = ({ trans, title, desc }) => {
             }
             style={{
               color:
-                desc === "successful"
+                trans?.status === "successful" && !trans?.metadata
                   ? "#0EA163"
-                  : desc === "pending"
+                  : trans?.status === "pending" && !trans?.metadata
                   ? "#A77A07"
                   : "#56616B",
             }}
           >
             {" "}
-            {desc}{" "}
+            {trans.type !== "deposit" ? trans?.status : desc}{" "}
           </p>
         </div>
       </div>
       <div>
         <h2 className="text-[16px] font-[700] text-[#131316] tracking-[-0.2px]">
-          USD 600
+          USD {balance}
         </h2>
         <p className="text-[16px] font-[500] text-[#56616B] tracking-[-0.2px] mt-3">
-          Apr 03,2022
+          {/* Apr 03,2022 */}
+          {date}
         </p>
       </div>{" "}
     </div>

@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: 'Degular';
+    src: url('../fonts/fonts/fonnts.com-DegularDemo-Medium.otf') format('opentype');
+    /* Add additional font formats if necessary */
+}
+
+body {
+    font-family: 'Degular', sans-serif;
+}
+
+.custom-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    /* background-color: #1C1B1F; */
+    border: 2px solid #1C1B1F;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-checkbox:checked {
+    background-color: #1C1B1F;
+    border-color: #1C1B1F;
+}
+
+.custom-checkbox:checked::before {
+    content: '\2713';
+    /* Checkmark character */
+    font-size: 10px;
+    /* Adjust size of checkmark */
+    color: white;
+    /* Color of checkmark */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Center the checkmark */
+    line-height: 0;
+    /* Ensure the checkmark stays inside the box */
+}

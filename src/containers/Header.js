@@ -5,13 +5,14 @@ import Logo from "../components/Logo";
 import Tabs from "./Tabs";
 import { bell, chat, menu } from "../assets/icons";
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <div className="header_container py-3 px-2 my-5  flex items-center justify-between mx-5">
       <Logo />
+      
       <Tabs />
       <div className="flex items-center">
-        <img src={bell} alt="notification"  />
+        <img src={bell} alt="notification" />
         <img src={chat} alt="notification" className="ml-7 mr-4" />
         <div className="bg-[#EFF1F6] rounded-[100px] flex items-center p-1 px-2">
           <div
@@ -23,7 +24,8 @@ const Header = () => {
               fontWeight: "600",
             }}
           >
-            OJ
+            {user?.first_name[0]}
+            {user?.last_name[0]}
           </div>
           <img src={menu} alt="menu" className="mx-2 ml-3 w-[24px] h-[24px]" />
         </div>

@@ -2,12 +2,12 @@
 
 import React from "react";
 
-const FilterButton = () => {
+const FilterButton = ({ filterNo }) => {
   return (
     <div className="flex items-center justify-around bg-[#EFF1F6] rounded-[100px] p-2.5 px-5">
       <p className="text-[#131316] font-[500]">Filter</p>
       <p className="rounded-full text-[#fff] bg-[#131316] p-1 px-2 text-xs mx-3">
-        3
+        {filterNo}
       </p>
       <svg
         width="12"

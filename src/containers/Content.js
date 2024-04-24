@@ -1,39 +1,94 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import AppBar from "../components/AppBar";
 import Graph from "../components/Graph";
 import Transactions from "./Transactions";
 const Content = () => {
+  const [user, setUser] = useState(null);
+  const [wallet, setWalletBalance] = useState(null);
+  const [transactions, setTransactions] = useState(null);
+
   const WalletDetails = [
     {
       title: "Ledger Balance",
-      amount: "5,000.00",
+      amount: wallet?.ledger_balance,
     },
     {
       title: "Total Payout",
-      amount: "5,000.00",
+      amount: wallet?.total_payout,
     },
     {
       title: "Total Revenue",
-      amount: "5,000.00",
+      amount: wallet?.total_revenue,
     },
     {
       title: "Pending Payout",
-      amount: "5,000.00",
+      amount: wallet?.pending_payout,
     },
   ];
+  useEffect(() => {
+    fetch("https://fe-task-api.mainstack.io/" + "user", {
+      method: "GET",
+      headers: {},
+      credentials: "same-origin",
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then((res) => {
+        setUser(res);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("https://fe-task-api.mainstack.io/" + "wallet", {
+      method: "GET",
+      headers: {},
+      credentials: "same-origin",
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then((res) => {
+        setWalletBalance(res);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("https://fe-task-api.mainstack.io/" + "transactions", {
+      method: "GET",
+      headers: {},
+      credentials: "same-origin",
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then((res) => {
+        console.log(res);
+        setTransactions(res);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
   return (
     <div className=" w-full">
-      <Header />
+      <Header user={user} />
       <div className="flex justify-between mt-20 relative w-full">
-        <div className="absolute left-2  top-60">
+        <div className="hidden lg:flex absolute left-2  top-20 lg:top-60">
           <AppBar />
         </div>
         <div className="w-5/6 mx-auto">
-          <div className="w-full flex items-end justify-between ">
-            <div className="w-3/5 ">
+          <div className="w-full lg:flex items-end justify-between ">
+            <div className="w-full lg:w-3/5 ">
               <div className=" flex items-center ">
                 <div className="mr-10">
                   <p className="text-[#56616B] text-[14px] font-[500]">
@@ -44,7 +99,7 @@ const Content = () => {
                     className="text-[#131316] text-[36px] font-[700] "
                     style={{ letterSpacing: "-1.5px" }}
                   >
-                    USD 120,500.00
+                    USD {wallet?.balance}
                   </h1>
                 </div>
 
@@ -57,7 +112,7 @@ const Content = () => {
               </div>
             </div>
 
-            <div className="w-[271px] mb-10">
+            <div className="lg:w-[271px] mb-10">
               {WalletDetails.map((details, index) => (
                 <div key={index} className="my-5">
                   <div className="">
@@ -90,7 +145,7 @@ const Content = () => {
             </div>
           </div>
 
-          <Transactions />
+          <Transactions transactions={transactions} />
         </div>
       </div>
     </div>
