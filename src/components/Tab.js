@@ -21,7 +21,7 @@ const Tab = ({ active, index, tab }) => {
   };
   return (
     <div
-      className="flex items-center p-2 px-4 mx-1"
+      className="flex items-center p-2 px-4 mx-1 cursor-pointer"
       style={active === index ? Styles.active : Styles.inactive}
     >
       <img src={tab.icon} alt="" width="20px" height="20px" />

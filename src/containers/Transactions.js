@@ -9,10 +9,12 @@ import Dropdown from "../components/DropDown";
 import Close from "../assets/icons/close.svg";
 import Calender from "../components/Calender";
 import Empty from "../components/Empty";
+import { Calendar } from "../components/ui/calendar";
 
 const Transactions = ({ transactions }) => {
-    const [data, setData] = useState(transactions);
-    const [activeTab, setActiveTab]= useState(0)
+  const [date, setDate] = useState(new Date());
+  const [data, setData] = useState(transactions);
+  const [activeTab, setActiveTab] = useState(0);
   const [totalFilter, setTotalFilter] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isStoreOpen, setIsStoreOpen] = useState(false);
@@ -127,7 +129,9 @@ const Transactions = ({ transactions }) => {
                 onChange={() => handleCheckboxChange("option1", "Successful")}
                 className="custom-checkbox"
               />
-              <label className="text-[16px] font-[600] ml-5 ">Successful </label>
+              <label className="text-[16px] font-[600] ml-5 ">
+                Successful{" "}
+              </label>
             </div>
             <div className="flex items-center my-5">
               <input
@@ -230,7 +234,13 @@ const Transactions = ({ transactions }) => {
           </h1>{" "}
           <p className="text-[#56616B] text-[14px] font-[500]">
             Your transactions for{" "}
-            {activeTab===0?"Today":activeTab==1? "Last 7 days":activeTab===2?"This month":"Last 3 months"} 
+            {activeTab === 0
+              ? "Today"
+              : activeTab == 1
+              ? "Last 7 days"
+              : activeTab === 2
+              ? "This month"
+              : "Last 3 months"}
           </p>
         </div>
 
@@ -389,7 +399,13 @@ const Transactions = ({ transactions }) => {
                       <Dropdown
                         options={["Option 1", "Option 2", "Option 3"]}
                         onSelect={handleSelectOption}
-                        App={<Calender />}
+                        App={
+                          <Calender
+                            className="w-full"
+                            date={date}
+                            onClick={() => setDate}
+                          />
+                        }
                       />
                     </div>
                   )}

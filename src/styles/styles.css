@@ -11,6 +11,13 @@ body {
     font-family: 'Degular', sans-serif;
 }
 
+
+.header_container {
+    /* box-shadow: 0px 2px 4px 0px #2D3B430D; */
+    
+        box-shadow: 0px 2px 6px 0px #2D3B430F;
+        border-radius: 100px;
+}
 .custom-checkbox {
     -webkit-appearance: none;
     -moz-appearance: none;
